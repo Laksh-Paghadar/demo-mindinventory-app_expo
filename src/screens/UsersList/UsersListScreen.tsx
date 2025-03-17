@@ -6,32 +6,33 @@ import { AnimatedTouchableOpacity, Text } from '@app/blueprints';
 import { Icons, SVGIcons } from '@src/assets';
 import { AppImage, BaseLayout, Icon, SvgIcon } from '@src/components';
 import { contents } from '@src/context';
-import type { NewsResult } from '@src/services';
-import { scaled } from '@src/utils';
 
-import useNewsList from './useNewsList';
+import { scaled } from '@src/utils';
+import useUsersList from './useUsersList';
 
 const NewsListScreen = () => {
-  const {
-    color,
-    data,
-    handleNavigationNetwork,
-    handleNavigationNewsItem,
-    handleSetting,
-    styles,
-  } = useNewsList();
+  const { color, data, handleNavigationNetwork, handleSetting, styles } =
+    useUsersList();
 
-  const renderItem = ({ item }: { item: NewsResult }) => {
+  const renderItem = ({
+    item,
+  }: {
+    item: {
+      id: number;
+      email: string;
+      first_name: string;
+      last_name: string;
+      avatar: string;
+    };
+  }) => {
     return (
       <AnimatedTouchableOpacity
         containerStyle={styles.newsItemContainer}
-        onPress={handleNavigationNewsItem(item)}>
-        <AppImage source={item.imageUrl} style={styles.newsImage} />
+        onPress={() => {}}>
+        <AppImage source={item.avatar} style={styles.newsImage} />
         <View style={styles.newsTextView}>
-          <Text preset="h6">
-            {item?.source ? item.source : contents('newsList.general')}
-          </Text>
-          <Text preset="title">{item.title}</Text>
+          <Text preset="h6">{item?.first_name + item.last_name}</Text>
+          <Text preset="title">Email: {item.email}</Text>
         </View>
       </AnimatedTouchableOpacity>
     );
@@ -43,14 +44,14 @@ const NewsListScreen = () => {
         bounces={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={data?.data}
         style={styles.flatlistStyles}
         initialNumToRender={5}
-        keyExtractor={item => `${item.id}_${item.title}`}
+        keyExtractor={item => `${item.id}_${item.email}`}
         renderItem={renderItem}
         ListHeaderComponent={
           <View style={styles.headerContainer}>
-            <Text preset="h1">{contents('newsList.breakingNews')}</Text>
+            <Text preset="h1">UserList API</Text>
             <TouchableOpacity
               style={styles.networkButton}
               onPress={handleNavigationNetwork}>

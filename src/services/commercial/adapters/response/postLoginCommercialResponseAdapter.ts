@@ -1,6 +1,6 @@
 import { LoginResult } from '@src/services/models/login';
 
-import { LoginResponseDTO } from '../../dtos/UserResponseDTO';
+import { LoginResponseDTO } from '../../dtos/LoginResponseDTO';
 
 export class PostLoginCommercialResponseAdapter {
   constructor() {}

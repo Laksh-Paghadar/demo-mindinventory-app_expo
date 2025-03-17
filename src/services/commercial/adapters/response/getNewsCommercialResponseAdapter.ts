@@ -1,21 +1,26 @@
-import { NewsResult } from '../../../models';
-import { NewDataResponse, NewsResponseDTO } from '../../dtos/NewsResponseDTO';
+import { UserListResult } from '../../../models/news';
+import { UsersListResponseDTO } from '../../dtos/UsersListResponseDTO';
 
-export class getNewsCommercialResponseAdapter {
+export class getUsersListCommercialResponseAdapter {
   constructor() {}
 
-  service(dto: NewsResponseDTO): NewsResult[] {
-    return dto.Data.map((item: NewDataResponse) => {
-      return {
-        body: item.body,
-        categories: item.categories,
+  service(dto: UsersListResponseDTO): UserListResult {
+    return {
+      page: dto.page,
+      per_page: dto.per_page,
+      total: dto.total,
+      total_pages: dto.total_pages,
+      data: dto.data.map(item => ({
         id: item.id,
-        imageUrl: item.imageurl,
-        published_on: item.published_on,
-        source: item.source,
-        tags: item.tags,
-        title: item.title,
-      };
-    });
+        email: item.email,
+        first_name: item.first_name,
+        last_name: item.last_name,
+        avatar: item.avatar,
+      })),
+      support: {
+        url: dto.support.url,
+        text: dto.support.text,
+      },
+    };
   }
 }

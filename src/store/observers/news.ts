@@ -1,3 +1,3 @@
 import { RootState } from '../index';
 
-export const getNewsData = (state: RootState) => state.newsData.news;
+export const getUsersListData = (state: RootState) => state.usersListData.users;

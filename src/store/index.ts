@@ -14,11 +14,10 @@ import {
 
 import { reduxStorage } from '@src/context';
 
-import { newsData, newsDataName, userData } from './reducers';
+import { usersListData, usersListDataName } from './reducers';
 
 const rootReducer = combineReducers({
-  newsData,
-  userData,
+  usersListData,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -26,7 +25,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
   storage: reduxStorage,
-  whitelist: [newsDataName],
+  whitelist: [usersListDataName],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

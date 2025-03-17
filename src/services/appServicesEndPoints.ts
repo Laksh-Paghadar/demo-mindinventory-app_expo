@@ -1,5 +1,5 @@
 export enum ServicesEndPoints {
   USERS = '/users',
-  LOGIN = '/login',
-  NEWS = '/news/',
+  LOGIN = '/api/login', //POST api type
+  NEWS = '/api/users/', //GET Api type
 }

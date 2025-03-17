@@ -3,13 +3,20 @@ export interface Source {
   name: string;
 }
 
-export interface NewsResult {
-  body: string;
-  categories: string;
-  id: string;
-  imageUrl: string;
-  published_on: number;
-  source: string;
-  tags: string;
-  title: string;
+export interface UserListResult {
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+  data: Array<{
+    id: number;
+    email: string;
+    first_name: string;
+    last_name: string;
+    avatar: string;
+  }>;
+  support: {
+    url: string;
+    text: string;
+  };
 }

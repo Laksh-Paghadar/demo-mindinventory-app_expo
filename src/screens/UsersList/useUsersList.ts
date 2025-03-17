@@ -3,26 +3,25 @@ import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { contents, useAppContext } from '@src/context';
-import { NewsResult } from '@src/services';
-import { getNewsData as newsData, setNews, useAppDispatch } from '@src/store';
+import { getUsersListData, setUsersListData, useAppDispatch } from '@src/store';
 import { logger } from '@src/utils';
 
-import { newsListStyles } from './NewsList.style';
+import { newsListStyles } from './UsersList.style';
 import { Screen } from '../../navigation/appNavigation.type';
 
-const useNewsList = () => {
+const useUsersList = () => {
   const { color, loader, navigation, services } = useAppContext();
   const dispatch = useAppDispatch();
 
-  const data = useSelector(newsData);
+  const data = useSelector(getUsersListData);
 
-  const getNewsData = useCallback(async () => {
+  const getUsersData = useCallback(async () => {
     loader.current?.show();
     try {
-      const getNews = await services.getNews();
-      dispatch(setNews(getNews));
+      const getUser = await services.getUsers(1);
+      dispatch(setUsersListData(getUser));
     } catch (error) {
-      logger('Error getNews>>', error);
+      logger('Error getUsers>>', error);
     } finally {
       loader.current?.hide();
     }
@@ -32,32 +31,31 @@ const useNewsList = () => {
     navigation.navigate(Screen.NETWORK_CHECK);
   }, [navigation]);
 
-  const handleNavigationNewsItem = useCallback(
-    (item: NewsResult) => () => {
-      navigation.navigate(Screen.NEWS_DETAIL, {
-        item,
-      });
-    },
-    [navigation]
-  );
+  // const handleNavigationNewsItem = useCallback(
+  //   (item: UserListResult) => () => {
+  //     navigation.navigate(Screen.NEWS_DETAIL, {
+  //       item,
+  //     });
+  //   },
+  //   [navigation]
+  // );
 
   const handleSetting = useCallback(() => {
     navigation.navigate(Screen.SETTING);
   }, [navigation]);
 
   useEffect(() => {
-    getNewsData();
-  }, [getNewsData]);
+    getUsersData();
+  }, [getUsersData]);
 
   return {
     color,
     contents,
     data,
     handleNavigationNetwork,
-    handleNavigationNewsItem,
     handleSetting,
     styles: newsListStyles(color),
   };
 };
 
-export default useNewsList;
+export default useUsersList;

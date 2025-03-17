@@ -1,6 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 import { AppConfig } from '@src/constants';
+import { logger } from '@src/utils';
+import { API_URL } from '@env';
 
 class APIhandler {
   private readonly axiosInstance: AxiosInstance;
@@ -21,6 +23,26 @@ class APIhandler {
         );
       },
     });
+
+    // ***** Uncomment lines for debugging Request *****
+    this.axiosInstance.interceptors.request.use(req => {
+      logger('LAKSH >> apiHandler url:', JSON.stringify(req.url, null, ' '));
+      logger(
+        'LAKSH >> apiHandler Request:',
+        JSON.stringify(req.data, null, ' ')
+      );
+      return req;
+    });
+
+    // ***** Uncomment lines for debugging Response *****
+    this.axiosInstance.interceptors.response.use(res => {
+      logger(
+        ' LAKSH >> apiHandler Response:',
+        JSON.stringify(res.data, null, ' ')
+      );
+      return res;
+    });
+
     // ***** Uncomment lines for debugging Request *****
     // this.axiosInstance.interceptors.request.use(req => {
     //   if (__DEV__) {
@@ -75,6 +97,7 @@ class APIhandler {
 
   postAPIService = async (api: string, reqParams: any): Promise<any> => {
     try {
+      logger('LAKSH >> apiHandler API Call:', `POST ${API_URL}${api}`);
       const response = await this.axiosInstance.post<any>(api, reqParams, {
         headers: { ...this.axiosHeaders, ...this.requestHeader() },
       });
@@ -86,6 +109,7 @@ class APIhandler {
 
   async getAPIService(api: string): Promise<any> {
     try {
+      logger('LAKSH >> apiHandler API Call:', `GET ${API_URL}${api}`);
       // get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>;
       const response = await this.axiosInstance.get(api, {
         headers: { ...this.axiosHeaders, ...this.requestHeader() },
@@ -98,6 +122,7 @@ class APIhandler {
 
   deleteAPIService = async (api: string, reqParams: any = {}): Promise<any> => {
     try {
+      logger('LAKSH >> apiHandler API Call:', `DELETE ${API_URL}${api}`);
       const response = await this.axiosInstance.delete<any>(api, {
         headers: { ...this.axiosHeaders, ...this.requestHeader() },
         params: reqParams,
@@ -110,6 +135,7 @@ class APIhandler {
 
   putAPIService = async (api: string, reqParams: any = {}): Promise<any> => {
     try {
+      logger('LAKSH >> apiHandler API Call:', `PUT ${API_URL}${api}`);
       const response = await this.axiosInstance<any>({
         data: reqParams,
         headers: { ...this.axiosHeaders, ...this.requestHeader() },
