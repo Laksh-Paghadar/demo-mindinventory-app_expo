@@ -1,18 +1,23 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { Button, FlatList, TouchableOpacity, View } from 'react-native';
 
 import { AnimatedTouchableOpacity, Text } from '@app/blueprints';
 
 import { Icons, SVGIcons } from '@src/assets';
 import { AppImage, BaseLayout, Icon, SvgIcon } from '@src/components';
-import { contents } from '@src/context';
 
 import { scaled } from '@src/utils';
 import useUsersList from './useUsersList';
 
 const NewsListScreen = () => {
-  const { color, data, handleNavigationNetwork, handleSetting, styles } =
-    useUsersList();
+  const {
+    color,
+    data,
+    handleNavigationNetwork,
+    handleSetting,
+    handleResourceBtn,
+    styles,
+  } = useUsersList();
 
   const renderItem = ({
     item,
@@ -69,6 +74,11 @@ const NewsListScreen = () => {
           </View>
         }
       />
+      <View>
+        <Button
+          title="Go to resources list"
+          onPress={handleResourceBtn}></Button>
+      </View>
     </BaseLayout>
   );
 };

@@ -31,17 +31,12 @@ const useUsersList = () => {
     navigation.navigate(Screen.NETWORK_CHECK);
   }, [navigation]);
 
-  // const handleNavigationNewsItem = useCallback(
-  //   (item: UserListResult) => () => {
-  //     navigation.navigate(Screen.NEWS_DETAIL, {
-  //       item,
-  //     });
-  //   },
-  //   [navigation]
-  // );
-
   const handleSetting = useCallback(() => {
     navigation.navigate(Screen.SETTING);
+  }, [navigation]);
+
+  const handleResourceBtn = useCallback(() => {
+    navigation.navigate(Screen.RESOURCE_LIST);
   }, [navigation]);
 
   useEffect(() => {
@@ -54,6 +49,7 @@ const useUsersList = () => {
     data,
     handleNavigationNetwork,
     handleSetting,
+    handleResourceBtn,
     styles: newsListStyles(color),
   };
 };

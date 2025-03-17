@@ -8,6 +8,9 @@ import { LoginParams, LoginResult } from './models/login';
 import serviceAdapter from './serviceAdapter';
 import { LoginResponseDTO } from './commercial/dtos/LoginResponseDTO';
 import { logger } from '@src/utils';
+import ResourceListResponseDTO from './commercial/dtos/ResourceListResponseDTO';
+import { ResourcesList } from './models/resourcesList';
+import { getResourceResponseAdapter } from './commercial/adapters/response/getResourceResponseAdapter';
 
 export class AppServices {
   constructor() {}
@@ -31,26 +34,23 @@ export class AppServices {
     });
   };
 
-  // listUsers = async (listUserReq: ListUserReq): Promise<UserResult[]> => {
-  //   const endPoint = `${ServicesEndPoints.USERS}?page=${listUserReq.page}&per_page=${listUserReq.per_page}`;
-  //   console.log(
-  //     'Laksh >> AppService >> API Call URL:',
-  //     AppConfig.API_URL + endPoint
-  //   );
-  //   console.log('Laksh >> AppService >> Request Parameters:', listUserReq);
+  getResourceList = async (): Promise<ResourcesList> => {
+    const endpoint = ServicesEndPoints.RESOURCE_LIST;
 
-  //   return new Promise((resolve, reject) => {
-  //     serviceAdapter<UserResponseDTO, ListUserReq>(API_METHODS.GET, endPoint)
-  //       .then(res => {
-  //         console.log('Laksh >> AppService >> Response:', res);
-  //         resolve(new GetUserCommercialResponseAdapter().service(res));
-  //       })
-  //       .catch(error => {
-  //         console.error('Laksh >> AppService >> Error:', error);
-  //         reject(error);
-  //       });
-  //   });
-  // };
+    return new Promise((resolve, reject) => {
+      serviceAdapter<ResourceListResponseDTO, undefined>(
+        API_METHODS.GET,
+        endpoint
+      )
+        .then(res => {
+          resolve(new getResourceResponseAdapter().services(res));
+        })
+        .catch(error => {
+          logger('Laksh >> AppService >> Error:', error);
+          reject(error);
+        });
+    });
+  };
 
   getUsers = async (page: number): Promise<UserListResult> => {
     const endPoint = `${ServicesEndPoints.NEWS}?page=${page}`;

@@ -6,6 +6,7 @@ export enum Screen {
   NEWS_DETAIL = 'NEWS_DETAIL',
   NEWS_LIST = 'NEWS_LIST',
   SETTING = 'SETTING',
+  RESOURCE_LIST = 'RESOURCE_LIST',
   LOGIN = 'LOGIN',
   SIGNUP = 'SIGNUP',
 }
@@ -15,6 +16,7 @@ export type NavStackParams = {
   [Screen.NETWORK_CHECK]: undefined;
   [Screen.NEWS_LIST]: undefined;
   [Screen.SETTING]: undefined;
+  [Screen.RESOURCE_LIST]: undefined;
   [Screen.LOGIN]: undefined;
   [Screen.SIGNUP]: undefined;
 };

@@ -15,9 +15,11 @@ import {
 import { reduxStorage } from '@src/context';
 
 import { usersListData, usersListDataName } from './reducers';
+import { resourceListData } from './reducers/resources';
 
 const rootReducer = combineReducers({
   usersListData,
+  resourceListData,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

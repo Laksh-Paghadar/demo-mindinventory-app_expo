@@ -16,6 +16,7 @@ import {
 // import { isForceUpdate } from '@src/store';
 
 import { NavStackParams, Screen } from './appNavigation.type';
+import ResourcesListComponent from '@src/screens/ResourceList/ResourceListScreen';
 // import { ForUpdateStack } from './ForceupdateStack';
 
 export const navigationRef =
@@ -67,6 +68,10 @@ export const AppNavigation = () => {
 
           <Stack.Screen name={Screen.SETTING} component={SettingScreen} />
           <Stack.Screen name={Screen.LOGIN} component={LoginScreen} />
+          <Stack.Screen
+            name={Screen.RESOURCE_LIST}
+            component={ResourcesListComponent}
+          />
           {__DEV__ && (
             <Stack.Screen
               name={Screen.NETWORK_CHECK}
