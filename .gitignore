@@ -1,0 +1,72 @@
+# React Native / Expo
+node_modules/
+.expo/
+.expo-shared/
+
+# Logs
+*.log
+*.log.*
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# IDE Directories
+.vscode/
+.idea/
+
+# Babel / Metro
+babel.config.js
+metro.config.js
+index.js
+
+# Build outputs
+build/
+android/app/build/
+ios/Pods/
+ios/build/
+ios/*.xcodeproj/project.xcworkspace/
+ios/*.xcuserdata/
+
+# Environment Variables
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.swp
+*.lock
+
+# Expo-specific files
+web-build/
+dist/
+.expo/web/
+.expo/packager-info.json
+.expo/log/
+.expo/cache/
+
+# Firebase & Google Services
+android/app/google-services.json
+ios/GoogleService-Info.plist
+
+# Other generated files
+*.iml
+*.hprof
+*.bak
+*.old
+*.gz
+*.zip
+
+# Yarn / npm
+.yarn/
+.pnp.js
+.pnp.cjs
+yarn.lock
+package-lock.json
+
+# macOS specific
+*.xcuserdatad/
+*.xcworkspace/
+
+# VSCode settings
+.settings/
